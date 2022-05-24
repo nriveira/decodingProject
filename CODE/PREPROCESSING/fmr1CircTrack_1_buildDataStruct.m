@@ -1,4 +1,4 @@
-function group = fmr1CircTrack_1_buildDataStruct
+function group = fmr1CircTrack_1_buildDataStruct(dataDir)
 % function group = fmr1CircTrack_1_buildDataStruct(dataDir)
 %
 % PURPOSE:
@@ -13,12 +13,11 @@ function group = fmr1CircTrack_1_buildDataStruct
 % JBT
 % 11/29/2020
 % Colgin Lab
-%dataDir = 'E:\FMR1_CIRCTRACK\RAW_DATA';
-dataDir = "C:\Users\nick\Projects\RAW_DATA";
+% dataDir = 'E:\FMR1_CIRCTRACK\RAW_DATA';
+% dataDir = "C:\Users\nick\Projects\RAW_DATA";
 
 group(1).name = 'WT';
 group(2).name = 'KO';
-
 
 %     *** THIS FUNCTION MUST BE UPDATED FOR EACH NEW RAT ****
 group = fmr1CircTrack_0_hardCodeTestData(group); %Add names, dates, theta tet, reward locs
@@ -105,7 +104,7 @@ for g = 1:2
 %                         filtLfp = filter_lfp(lfpStruct, 2, 20);
 %                         save([cscFn(1:end-4) '_broadThetaLfp'], 'filtLfp');
                     end
-                    if ~isfile([cscFn(1:end-4) '_waveletPower.mat'])
+%                    if ~isfile([cscFn(1:end-4) '_waveletPower.mat'])
                         fprintf('\t\t\t\tAdding Wavelet Power for Tetrode #%d\n', tetNums(tt));
                         lfpStruct = read_in_lfp(cscFn);
 
@@ -113,7 +112,7 @@ for g = 1:2
                         waveletPower.mean = mean(wp,2);
                         waveletPower.std = std(wp,0,2);
                         save([cscFn(1:end-4) '_waveletPower'], 'waveletPower');
-                    end
+%                    end
                 end
             end %begin            
         end %day

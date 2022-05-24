@@ -1,19 +1,24 @@
-function group = fmr1CircTrack_x_makeStruct
+function group = fmr1CircTrack_x_makeStruct(~)
 curDir = pwd;
 structNickName = 'nick';
+dataDir = "C:\Users\nick\Projects\RAW_DATA";
 
-% group = fmr1CircTrack_1_buildDataStruct; %calls fmr1CircTrack_0_
-% group = fmr1CircTrack_2_attachPfs(group);
-% group = fmr1CircTrack_3_tagLaps(group);
-% group = fmr1CircTrack_4_detectSequences(group);
-% group = fmr1CircTrack_5_addSleepInfoToStruct(group);
-% group(2).rat.day.sleep(1) = [];
-% group(2).rat.day.sleep(4) = [];
-
+% tic
+% group = fmr1CircTrack_1_buildDataStruct(dataDir); %calls fmr1CircTrack_0_
+% cd(curDir); save('tempDataStruct', 'group');
+% toc
+group = fmr1CircTrack_2_attachPfs(group);
+cd(curDir); save('tempDataStruct', 'group');
+group = fmr1CircTrack_3_tagLaps(group);
+cd(curDir); save('tempDataStruct', 'group');
+group = fmr1CircTrack_4_detectSequences(group);
+cd(curDir); save('tempDataStruct', 'group');
+group = fmr1CircTrack_5_addSleepInfoToStruct(group);
+group(2).rat.day.sleep(1) = [];
+group(2).rat.day.sleep(4) = [];
+cd(curDir); save('tempDataStruct', 'group');
 group = fmr1CircTrack_6_addReplayEventsToStruct(group);
-
-%cd('E:\FMR1_CIRCTRACK\DATA_STRUCTS')
-cd("C:\Users\nick\Projects\DATA_STRUCTS")
+cd(curDir)
 
 tmpDate = clock;
 if tmpDate(2) < 10
@@ -23,6 +28,7 @@ else
 end %if we need to add a 0 to month
 
 save(['dataStruct_postFxn6_' structNickName strDate], 'group')
+
 close all
 cd(curDir)
 
