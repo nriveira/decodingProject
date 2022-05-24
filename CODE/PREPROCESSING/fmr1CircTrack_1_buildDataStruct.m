@@ -109,15 +109,13 @@ for g = 1:2
                         fprintf('\t\t\t\tAdding Wavelet Power for Tetrode #%d\n', tetNums(tt));
                         lfpStruct = read_in_lfp(cscFn);
 
-                        waveletPower = get_wavelet_power(lfpStruct.data, lfpStruct.Fs, [1, 250],6);
-%                        save([cscFn(1:end-4) '_waveletPower'], 'waveletPower');
-%                         filtLfp = filter_lfp(lfpStruct, 2, 20);
-%                         save([cscFn(1:end-4) '_broadThetaLfp'], 'filtLfp');
+                        wp = get_wavelet_power(lfpStruct.data, lfpStruct.Fs, [1, 250],6);
+                        waveletPower.mean = mean(wp,2);
+                        waveletPower.std = std(wp,0,2);
+                        save([cscFn(1:end-4) '_waveletPower'], 'waveletPower');
                     end
                 end
-                
-            end %begin
-            
+            end %begin            
         end %day
     end
 end
