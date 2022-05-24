@@ -1,4 +1,4 @@
-function group = fmr1CircTrack_5_addSleepInfoToStruct(group)
+function group = fmr1CircTrack_5_addSleepInfoToStruct(group, dataDir)
 % function group = fmr1CircTrack_5_addSleepInfoToStruct(group)
 % 
 % PURPOSE:
@@ -16,12 +16,7 @@ function group = fmr1CircTrack_5_addSleepInfoToStruct(group)
 %% INITIALIZE
 
 restPotDim = [12 12]; %10 cm diameter, with room for overhanging rat
-
-dataDir = "C:\Users\nick\Projects\RAW_DATA";
-%dataDir = 'E:\FMR1_CIRCTRACK\RAW_DATA';
-
 spdCheck = 1;
-
 stdCut = 5; %standard deviations above the mean for rip power cut
 durThresh = 0.5; %minimum dur for ripples
 
@@ -34,7 +29,7 @@ for g = 1:2
         for d = 1:length(group(g).rat(r).day)
             fprintf('\t\tDay %d/%d\n', d, length(group(g).rat(r).day));
             %cd([dataDir '\' group(g).name '\' group(g).rat(r).name '\' group(g).rat(r).day(d).name]);
-            cd(strjoin([dataDir '\' group(g).name '\' group(g).rat(r).name '\' group(g).rat(r).day(d).name], ''));
+            cd(strjoin([dataDir '/' group(g).name '/' group(g).rat(r).name '/' group(g).rat(r).day(d).name], ''));
             
             fid = fopen('CellList.txt');
             tmp = textscan(fid, '%s', 'delimiter', '\n');
@@ -63,8 +58,8 @@ for g = 1:2
                     if find(slpFoldNums == s)
                         
                         fprintf('\t\t\tSleep %d\n', s);
-                        group(g).rat(r).day(d).sleep(s).dir = [dataDir '\' group(g).name '\' group(g).rat(r).name '\' group(g).rat(r).day(d).name '\sleep' num2str(s)];
-                        group(g).rat(r).day(d).sleep(s).dir = strjoin([dataDir '\' group(g).name '\' group(g).rat(r).name '\' group(g).rat(r).day(d).name '\sleep' num2str(s)],'');
+                        group(g).rat(r).day(d).sleep(s).dir = [dataDir '/' group(g).name '/' group(g).rat(r).name '/' group(g).rat(r).day(d).name '/sleep' num2str(s)];
+                        group(g).rat(r).day(d).sleep(s).dir = strjoin([dataDir '/' group(g).name '/' group(g).rat(r).name '/' group(g).rat(r).day(d).name '/sleep' num2str(s)],'');
                         cd(group(g).rat(r).day(d).sleep(s).dir)
                         
                         coords = read_in_coords('VT1.nvt', restPotDim(1), restPotDim(2));

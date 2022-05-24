@@ -1,24 +1,25 @@
-function group = fmr1CircTrack_x_makeStruct(~)
-curDir = pwd;
+function group = fmr1CircTrack_x_makeStruct(group)
+curDir = "C:/Users/nick/Projects/decodingProject/CODE/PREPROCESSING";
+dataDir = "C:/Users/nick/Projects/RAW_DATA";
+saveDir = "C:/Users/nick/Projects/DATA_STRUCTS";
 structNickName = 'nick';
-dataDir = "C:\Users\nick\Projects\RAW_DATA";
 
 % tic
 % group = fmr1CircTrack_1_buildDataStruct(dataDir); %calls fmr1CircTrack_0_
 % cd(curDir); save('tempDataStruct', 'group');
 % toc
 group = fmr1CircTrack_2_attachPfs(group);
-cd(curDir); save('tempDataStruct', 'group');
+cd(saveDir); save('tempDataStruct', 'group');
 group = fmr1CircTrack_3_tagLaps(group);
-cd(curDir); save('tempDataStruct', 'group');
+cd(saveDir); save('tempDataStruct', 'group');
 group = fmr1CircTrack_4_detectSequences(group);
-cd(curDir); save('tempDataStruct', 'group');
-group = fmr1CircTrack_5_addSleepInfoToStruct(group);
+cd(saveDir); save('tempDataStruct', 'group');
+group = fmr1CircTrack_5_addSleepInfoToStruct(group, dataDir);
 group(2).rat.day.sleep(1) = [];
 group(2).rat.day.sleep(4) = [];
-cd(curDir); save('tempDataStruct', 'group');
+cd(saveDir); save('tempDataStruct', 'group');
 group = fmr1CircTrack_6_addReplayEventsToStruct(group);
-cd(curDir)
+cd(saveDir)
 
 tmpDate = clock;
 if tmpDate(2) < 10
