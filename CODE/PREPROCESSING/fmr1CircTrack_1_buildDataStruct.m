@@ -13,8 +13,6 @@ function group = fmr1CircTrack_1_buildDataStruct(dataDir)
 % JBT
 % 11/29/2020
 % Colgin Lab
-% dataDir = 'E:\FMR1_CIRCTRACK\RAW_DATA';
-% dataDir = "C:\Users\nick\Projects\RAW_DATA";
 
 group(1).name = 'WT';
 group(2).name = 'KO';
@@ -29,9 +27,7 @@ for g = 1:2
         fprintf('\tRat %d/%d (%s)\n', r, length(group(g).rat), group(g).rat(r).name);
         for d = 1:length(group(g).rat(r).day)
             fprintf('\t\tDay %d/%d\n', d, length(group(g).rat(r).day));
-            
-            %cd([dataDir '\' group(g).name '\' group(g).rat(r).name '\' group(g).rat(r).day(d).name]);
-            cd(strjoin([dataDir '\' group(g).name '\' group(g).rat(r).name '\' group(g).rat(r).day(d).name], ''));
+            cd(strjoin([dataDir '/' group(g).name '/' group(g).rat(r).name '/' group(g).rat(r).day(d).name], ''));
             
             fid = fopen('CellList.txt');
             tmp = textscan(fid, '%s', 'delimiter', '\n');
@@ -41,11 +37,8 @@ for g = 1:2
             for b = 1:4
                 fprintf('\t\t\tBegin %d\n', b);
                 
-                %group(g).rat(r).day(d).begin(b).dir = [dataDir '\' group(g).name '\' group(g).rat(r).name '\' group(g).rat(r).day(d).name '\begin' num2str(b)];
-                group(g).rat(r).day(d).begin(b).dir = strjoin([dataDir '\' group(g).name '\' group(g).rat(r).name '\' group(g).rat(r).day(d).name '\begin' num2str(b)],'');
-
+                group(g).rat(r).day(d).begin(b).dir = strjoin([dataDir '/' group(g).name '/' group(g).rat(r).name '/' group(g).rat(r).day(d).name '/begin' num2str(b)],'');
                 cd(group(g).rat(r).day(d).begin(b).dir);
-                
                 [post,posy,posx] = LoadCircPos('VT1.nvt');
                 
                 radPos = circpos(posx,posy); %radial position
@@ -104,15 +97,14 @@ for g = 1:2
 %                         filtLfp = filter_lfp(lfpStruct, 2, 20);
 %                         save([cscFn(1:end-4) '_broadThetaLfp'], 'filtLfp');
                     end
-%                    if ~isfile([cscFn(1:end-4) '_waveletPower.mat'])
-                        fprintf('\t\t\t\tAdding Wavelet Power for Tetrode #%d\n', tetNums(tt));
-                        lfpStruct = read_in_lfp(cscFn);
+                    
+                    fprintf('\t\t\t\tAdding Wavelet Power for Tetrode #%d\n', tetNums(tt));
+                    lfpStruct = read_in_lfp(cscFn);
 
-                        wp = get_wavelet_power(lfpStruct.data, lfpStruct.Fs, [1, 250],6);
-                        waveletPower.mean = mean(wp,2);
-                        waveletPower.std = std(wp,0,2);
-                        save([cscFn(1:end-4) '_waveletPower'], 'waveletPower');
-%                    end
+                    wp = get_wavelet_power(lfpStruct.data, lfpStruct.Fs, [1, 250],6);
+                    group(g).rat(r).day(d).begin(b).waveletPower(tt).mean = mean(wp,2);
+                    group(g).rat(r).day(d).begin(b).waveletPower(tt).std = std(wp,0,2);
+                    group(g).rat(r).day(d).begin(b).waveletPower(tt).tetNums = tetNums(tt);
                 end
             end %begin            
         end %day

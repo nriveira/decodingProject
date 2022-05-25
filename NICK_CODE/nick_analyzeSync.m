@@ -34,7 +34,7 @@ for g = 1:length(replayEvents)
     ylabel('Frequency (Hz)')
     title(replayEvents(g).name)
 end
-saveas(gcf,'figures/replayHeatmaps.png')
+%saveas(gcf,'figures/replayHeatmaps.png')
 
 figure()
 x = [replayEvents(1).lengthCounts; replayEvents(2).lengthCounts];
@@ -42,4 +42,4 @@ g = [repmat({'WT'},202,1); repmat({'KO'},115,1)];
 boxplot(x, g)
 title('Event Durations')
 ylabel('Time (ms)')
-saveas(gcf,'figures/replayEventCounts.png')
+%saveas(gcf,'figures/replayEventCounts.png')

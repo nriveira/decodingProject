@@ -50,10 +50,10 @@ for g = 1:length(group)
         
                         replayEvents(g).events(sri).lfpSWR = dataCombined(beginInd:endInd,:);
                         [replayEvents(g).events(sri).welch, replayEvents(g).freq] = pwelch(replayEvents(g).events(sri).lfpSWR, [],[],[], 2000);
-                        replayEvents(g).events(sri).wavelet_power = get_wavelet_power(dataCombined(beginInd:endInd,:),2000,[25,250],6,0,1);
+                        replayEvents(g).events(sri).wavelet_power = get_wavelet_power(dataCombined(beginInd:endInd,:),2000,[25,250],6);
     
                         replayEvents(g).events(sri).lfpBuffer = dataCombined(preBeginInd:postEndInd,:);
-                        replayEvents(g).events(sri).wavelet_powerPre = get_wavelet_power(replayEvents(g).events(sri).lfpBuffer,2000,[25,250],6,0,1);
+                        replayEvents(g).events(sri).wavelet_powerPre = get_wavelet_power(replayEvents(g).events(sri).lfpBuffer,2000,[25,250],6);
                         sri = sri+1;
                     end
                 end

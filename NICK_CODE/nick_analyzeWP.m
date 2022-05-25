@@ -1,4 +1,6 @@
-load("C:\Users\nick\Projects\DATA_STRUCTS\dataStruct_postFxn6_nick20220411.mat")
+load("C:/Users/nick/Projects/DATA_STRUCTS/dataStruct_postFxn6_nick20220411.mat")
+saveDir = "C:/Users/nick/Projects/DATA_STRUCTS";
+replays = [];
 
 for g = 1:length(group)
     max_length = 0;
@@ -24,7 +26,6 @@ for g = 1:length(group)
                     elseif(len > max_length)
                         max_length = len;
                     end
-
                 end
             end
         end
@@ -33,6 +34,7 @@ for g = 1:length(group)
     replays(g).max_length = max_length;
     replays(g).min_length = min_length;
 end
+save(strcat(saveDir, '/', 'replayDataStruct'), "replays");
 
 %% Estimating power on all replay events
 % Wavelet method
@@ -56,7 +58,7 @@ xlim([25,250])
 xlabel('Frequency (Hz)')
 ylabel('Power (dB)')
 legend({'WT','','KO',''})
-saveas(gcf,'figures/waveletAllEvents.png')
+%saveas(gcf,'figures/waveletAllEvents.png')
 
 % Welchs method
 figure(); hold on; axis square;
@@ -80,7 +82,7 @@ xlim([25,250])
 xlabel('Frequency (Hz)')
 ylabel('Power (dB)')
 legend({'WT','','KO',''})
-saveas(gcf,'figures/welchAllEvents.png')
+%saveas(gcf,'figures/welchAllEvents.png')
 
 %% Sorting forward vs reverse
 for g = 1:length(group)
@@ -110,7 +112,7 @@ xlim([25,250])
 xlabel('Frequency (Hz)')
 ylabel('Power (dB)')
 legend({'WT','','KO',''})
-saveas(gcf,'figures/waveletForwardEvents.png')
+%saveas(gcf,'figures/waveletForwardEvents.png')
 
 % Forward welch
 colors = 'gr';
@@ -134,7 +136,7 @@ xlim([25,250])
 xlabel('Frequency (Hz)')
 ylabel('Power (dB)')
 legend({'WT','','KO',''})
-saveas(gcf,'figures/welchForwardEvents.png')
+%saveas(gcf,'figures/welchForwardEvents.png')
 
 % Reverse wavelet
 figure(); hold on; axis square;
@@ -158,7 +160,7 @@ xlim([25,250])
 xlabel('Frequency (Hz)')
 ylabel('Power (dB)')
 legend({'WT','','KO',''})
-saveas(gcf,'figures/waveletReverseEvents.png')
+%saveas(gcf,'figures/waveletReverseEvents.png')
 
 % Reverse welch
 figure(); hold on; axis square;
@@ -182,4 +184,4 @@ xlim([25,250])
 xlabel('Frequency (Hz)')
 ylabel('Power (dB)')
 legend({'WT','','KO',''})
-saveas(gcf,'figures/welchReverseEvents.png')
+%saveas(gcf,'figures/welchReverseEvents.png')

@@ -1,24 +1,18 @@
-function group = fmr1CircTrack_x_makeStruct(group)
+function group = fmr1CircTrack_x_makeStruct(~)
 curDir = "C:/Users/nick/Projects/decodingProject/CODE/PREPROCESSING";
 dataDir = "C:/Users/nick/Projects/RAW_DATA";
 saveDir = "C:/Users/nick/Projects/DATA_STRUCTS";
 structNickName = 'nick';
 
-% tic
-% group = fmr1CircTrack_1_buildDataStruct(dataDir); %calls fmr1CircTrack_0_
-% cd(curDir); save('tempDataStruct', 'group');
-% toc
+group = fmr1CircTrack_1_buildDataStruct(dataDir); %calls fmr1CircTrack_0_
 group = fmr1CircTrack_2_attachPfs(group);
-cd(saveDir); save('tempDataStruct', 'group');
 group = fmr1CircTrack_3_tagLaps(group);
-cd(saveDir); save('tempDataStruct', 'group');
 group = fmr1CircTrack_4_detectSequences(group);
-cd(saveDir); save('tempDataStruct', 'group');
 group = fmr1CircTrack_5_addSleepInfoToStruct(group, dataDir);
 group(2).rat.day.sleep(1) = [];
 group(2).rat.day.sleep(4) = [];
-cd(saveDir); save('tempDataStruct', 'group');
 group = fmr1CircTrack_6_addReplayEventsToStruct(group);
+group = fmr1CircTrack_7_normalizeWP(group);
 cd(saveDir)
 
 tmpDate = clock;
@@ -28,7 +22,7 @@ else
     strDate = [num2str(tmpDate(1)) num2str(tmpDate(2)) num2str(tmpDate(3))];
 end %if we need to add a 0 to month
 
-save(['dataStruct_postFxn6_' structNickName strDate], 'group')
+save(['dataStruct_postFxn7_' structNickName strDate], 'group')
 
 close all
 cd(curDir)
