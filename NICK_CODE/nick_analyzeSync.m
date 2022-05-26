@@ -34,7 +34,7 @@ function replayEvents = nick_analyzeSync(replayEvents, saveDir)
         set(gca,'YDir','normal')
     
         c = colorbar;   
-        ylabel(c, 'Power (z-scored)')
+        ylabel(c, 'Power (Z-score)')
     
         xline(0, 'k--')
         xlim([-400, 400])
