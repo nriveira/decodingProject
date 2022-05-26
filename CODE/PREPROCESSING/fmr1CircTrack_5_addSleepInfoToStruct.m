@@ -15,6 +15,8 @@ function group = fmr1CircTrack_5_addSleepInfoToStruct(group, dataDir)
 
 %% GET INFO
 
+restPotDim = [12 12];
+
 for g = 1:2
     fprintf('%s\n', group(g).name)
     for r = 1:length(group(g).rat)
@@ -46,7 +48,7 @@ for g = 1:2
                     slpFoldNums(sInd) = s;
                 end
                 
-                for s = 1:length(group(g).rat(r).day(d).sleep)
+                for s = 1:5
                     if find(slpFoldNums == s)
                         fprintf('\t\t\tSleep %d\n', s);
                         group(g).rat(r).day(d).sleep(s).dir = [dataDir '/' group(g).name '/' group(g).rat(r).name '/' group(g).rat(r).day(d).name '/sleep' num2str(s)];
@@ -103,7 +105,6 @@ for g = 1:2
         end %day
     end %rat
     
-end %group
-
+end %grou
 
 end %function

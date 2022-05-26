@@ -89,22 +89,20 @@ for g = 1:2
                 
                 for tt = 1:length(tetNums)
                     cscFn = ['CSC' num2str(tetNums(tt)) '.ncs'];
-                    if ~isfile([cscFn(1:end-4) '_broadThetaLfp.mat'])
-                        fprintf('\t\t\t\tFiltering LFP for Tetrode #%d\n', tetNums(tt));
+                    if ~isfile([cscFn(1:end-4) '_LfpForRipDetect'])
+                        fprintf('\t\t\t\tAdding LFP for Tetrode #%d\n', tetNums(tt));
                         lfpStruct = read_in_lfp(cscFn);
-                        filtLfp = filter_lfp(lfpStruct, 6, 10);
-                        save([cscFn(1:end-4) '_narrowThetaLfp'], 'filtLfp');
-%                         filtLfp = filter_lfp(lfpStruct, 2, 20);
-%                         save([cscFn(1:end-4) '_broadThetaLfp'], 'filtLfp');
+                        save([cscFn(1:end-4) '_LfpForRipDetect'], 'lfpStruct');
                     end
-                    
-                    fprintf('\t\t\t\tAdding Wavelet Power for Tetrode #%d\n', tetNums(tt));
-                    lfpStruct = read_in_lfp(cscFn);
-
-                    wp = get_wavelet_power(lfpStruct.data, lfpStruct.Fs, [1, 250],6);
-                    group(g).rat(r).day(d).begin(b).waveletPower(tt).mean = mean(wp,2);
-                    group(g).rat(r).day(d).begin(b).waveletPower(tt).std = std(wp,0,2);
-                    group(g).rat(r).day(d).begin(b).waveletPower(tt).tetNums = tetNums(tt);
+%                     if ~isfile([cscFn(1:end-4) '_waveletPower.mat'])
+%                         fprintf('\t\t\t\tAdding Wavelet Power for Tetrode #%d\n', tetNums(tt));
+%                         lfpStruct = read_in_lfp(cscFn);
+%     
+%                         wp = get_wavelet_power(lfpStruct.data, lfpStruct.Fs, [1, 250],6);
+%                         group(g).rat(r).day(d).begin(b).waveletPower(tt).mean = mean(wp,2);
+%                         group(g).rat(r).day(d).begin(b).waveletPower(tt).std = std(wp,0,2);
+%                         group(g).rat(r).day(d).begin(b).waveletPower(tt).tetNums = tetNums(tt);
+%                     end
                 end
             end %begin            
         end %day

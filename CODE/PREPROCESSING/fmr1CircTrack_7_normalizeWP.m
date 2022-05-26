@@ -1,4 +1,4 @@
-function g = fmr1CircTrack_7_normalizeWP(group)
+function group = fmr1CircTrack_7_normalizeWP(group)
     for g = 1:length(group)
         fprintf('Group %d\n', g);
         for r = 1:length(group(g).rat)

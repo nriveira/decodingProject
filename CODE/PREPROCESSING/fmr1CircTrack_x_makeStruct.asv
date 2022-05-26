@@ -10,6 +10,8 @@ group = fmr1CircTrack_3_tagLaps(group);
 group = fmr1CircTrack_4_detectSequences(group);
 cd(saveDir); save('tempDataStruct','group')
 group = fmr1CircTrack_5_addSleepInfoToStruct(group, dataDir);
+group(2).rat.day.sleep(1) = [];
+group(2).rat.day.sleep(4) = [];
 cd(saveDir); save('tempDataStruct','group')
 group = fmr1CircTrack_6_addReplayEventsToStruct(group);
 group = fmr1CircTrack_7_normalizeWP(group);
