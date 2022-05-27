@@ -46,6 +46,10 @@ for g = 1:2
         fprintf('\tRat %d/%d\n', r, length(group(g).rat))
         for d = 1:length(group(g).rat(r).day)
             fprintf('\t\tDay %d/%d\n', d, length(group(g).rat(r).day))
+
+            % Remove sleep days
+            group(g).rat(r).day(d).sleep(cellfun(@isempty, {group(g).rat(r).day(d).sleep(:).coords})) = [];
+            
             tetNums = group(g).rat(r).day(d).tetNums;
             if length(group(g).rat(r).day(d).xAllBeginUnitInfo) > 20 %if there are enough simultaneously recorded cells
                 rateMaps = zeros(length(group(g).rat(r).day(d).xAllBeginUnitInfo), length(group(g).rat(r).day(d).xAllBeginUnitInfo(1).smRateMap));

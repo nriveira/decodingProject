@@ -1,4 +1,4 @@
-function group = nick_makeRunStruct(group, saveDir)
+function runEvents = nick_makeRunStruct(group, saveDir)
     %saveDir = "C:/Users/nick/Projects/DATA_STRUCTS";
     for g = 1:length(group)
         fprintf('Group %d\n', g);

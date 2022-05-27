@@ -1,17 +1,16 @@
 function group = fmr1CircTrack_x_makeStruct(dataDir, saveDir)
 curDir = pwd;
-%dataDir = "C:/Users/nick/Projects/RAW_DATA";
-%saveDir = "C:/Users/nick/Projects/DATA_STRUCTS";
 structNickName = 'nick';
 
 group = fmr1CircTrack_1_buildDataStruct(dataDir); %calls fmr1CircTrack_0_
 group = fmr1CircTrack_2_attachPfs(group);
 group = fmr1CircTrack_3_tagLaps(group);
 group = fmr1CircTrack_4_detectSequences(group);
-cd(saveDir); save('tempDataStruct','group')
+cd(saveDir); save('tempDataStruct','group','-v7.3')
 group = fmr1CircTrack_5_addSleepInfoToStruct(group, dataDir);
-cd(saveDir); save('tempDataStruct','group')
+cd(saveDir); save('tempDataStruct','group','-v7.3')
 group = fmr1CircTrack_6_addReplayEventsToStruct(group);
+cd(saveDir); save('tempDataStruct', 'group', '-v7.3');
 group = fmr1CircTrack_7_normalizeWP(group);
 cd(saveDir)
 
@@ -22,7 +21,7 @@ else
     strDate = [num2str(tmpDate(1)) num2str(tmpDate(2)) num2str(tmpDate(3))];
 end %if we need to add a 0 to month
 
-save(['dataStruct_postFxn7_' structNickName strDate], 'group')
+save(['dataStruct_postFxn7_' structNickName strDate], 'group','-v7.3')
 
 close all
 cd(curDir)

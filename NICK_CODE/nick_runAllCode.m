@@ -1,4 +1,4 @@
-saveDir = "C:/Users/nick/Projects/DATA_STRUCTS/figures";
+saveDir = "C:/Users/nick/Projects/DATA_STRUCTS";
 dataDir = "C:/Users/nick/Projects/RAW_DATA";
 codeDir = "C:/Users/nick/Projects/decodingProject";
 addpath(genpath(codeDir))
